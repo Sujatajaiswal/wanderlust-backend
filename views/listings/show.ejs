@@ -1,0 +1,52 @@
+<%- layout("layouts/boilerplate") %>
+
+<div class="row mt-3">
+  <div class="col-8 offset-3">
+    <h3>Listing Details</h3>
+  </div>
+  <div class="col-6 offset-3 show-card">
+    <div class="card">
+      <!-- Check if image exists before displaying -->
+      <% if (listing.image) { %>
+      <img src="<%= listing.image %>" <!-- Use listing.image directly -- />
+      class="card-img-top show-img" alt="listing_image" /> <% } else { %>
+      <img
+        src="https://via.placeholder.com/150"
+        class="card-img-top show-img"
+        alt="listing_image"
+      />
+      <% } %>
+      <div class="card-body">
+        <!-- Listing Title -->
+        <p class="card-text"><%= listing.title %></p>
+        <!-- Description -->
+        <p class="card-text"><%= listing.description %></p>
+        <!-- Price -->
+        <p class="card-text">
+          &#8377; <%= listing.price.toLocaleString("en-IN") %>
+        </p>
+        <!-- Location -->
+        <p class="card-text"><%= listing.location %></p>
+        <!-- Country -->
+        <p class="card-text"><%= listing.country %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Buttons: Edit and Delete (styled and in one row) -->
+<div class="btns d-flex justify-content-center mt-3">
+  <a
+    href="/listings/<%= listing._id %>/edit"
+    class="btn btn-primary btn-lg mx-2"
+  >
+    Edit
+  </a>
+  <form
+    method="POST"
+    action="/listings/<%= listing._id %>?_method=DELETE"
+    class="d-inline"
+  >
+    <button class="btn btn-danger btn-lg mx-2">Delete</button>
+  </form>
+</div>

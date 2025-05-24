@@ -1,0 +1,113 @@
+<% layout("layouts/boilerplate") %> <br /><br />
+<h3>Create a New Listing</h3>
+<form method="POST" action="/listings" class="needs-validation" novalidate>
+  <div class="form-group">
+    <label for="title" class="form-label">Title</label>
+    <input
+      name="listing[title]"
+      placeholder="Enter title"
+      type="text"
+      class="form-control"
+      required
+    />
+    <div class="valid-feedback">Title looks good!</div>
+    <div class="invalid-feedback">Please provide a title.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      name="listing[description]"
+      class="form-control"
+      placeholder="Enter description"
+      required
+    ></textarea>
+    <div class="invalid-feedback">Please provide a description.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="image" class="form-label">Image Link</label>
+    <input
+      name="listing[image]"
+      placeholder="Enter image URL/Link"
+      type="text"
+      class="form-control"
+    />
+    <div class="invalid-feedback">Please provide an image URL (optional).</div>
+  </div>
+
+  <div class="form-group">
+    <label for="price" class="form-label">Price</label>
+    <input
+      name="listing[price]"
+      placeholder="Enter price"
+      class="form-control"
+      type="number"
+      required
+      min="1"
+    />
+    <div class="invalid-feedback">Please enter a valid price.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="country" class="form-label">Country</label>
+    <input
+      name="listing[country]"
+      placeholder="Enter country"
+      type="text"
+      class="form-control"
+      required
+    />
+    <div class="invalid-feedback">Please enter a country name.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="location" class="form-label">Location</label>
+    <input
+      name="listing[location]"
+      placeholder="Enter location"
+      type="text"
+      class="form-control"
+      required
+    />
+    <div class="invalid-feedback">Please enter a location.</div>
+  </div>
+
+  <br /><br />
+  <button class="btn btn-dark add-btn">Add</button>
+  <br /><br />
+</form>
+
+<script>
+  // Bootstrap form validation script
+  (function () {
+    "use strict";
+    var forms = document.querySelectorAll(".needs-validation");
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+
+  // Custom validation for price field
+  const priceInput = document.querySelector('input[name="listing[price]"]');
+
+  priceInput.addEventListener("input", function () {
+    const priceValue = priceInput.value;
+    // Check if value is a number
+    if (isNaN(priceValue) || priceValue <= 0) {
+      priceInput.setCustomValidity("Please enter a valid price.");
+    } else {
+      priceInput.setCustomValidity("");
+    }
+  });
+</script>

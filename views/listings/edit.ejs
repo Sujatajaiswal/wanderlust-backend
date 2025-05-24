@@ -1,0 +1,123 @@
+<% layout("layouts/boilerplate") %>
+
+<body>
+  <br /><br />
+  <h3>Edit your Listing</h3>
+  <form
+    method="POST"
+    action="/listings/<%= listing._id %>?_method=PUT"
+    class="needs-validation"
+    novalidate
+  >
+    <div class="form-group">
+      <label for="title" class="form-label">Title</label>
+      <input
+        name="listing[title]"
+        value="<%= listing.title %>"
+        type="text"
+        class="form-control"
+        placeholder="Enter title"
+        required
+      />
+      <div class="invalid-feedback">Please provide a title.</div>
+    </div>
+    <br /><br />
+
+    <div class="form-group">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        name="listing[description]"
+        class="form-control"
+        placeholder="Enter description"
+        required
+      >
+<%= listing.description %></textarea
+      >
+      <div class="invalid-feedback">Please provide a description.</div>
+    </div>
+    <br /><br />
+
+    <div class="form-group">
+      <label for="image" class="form-label">Image Link</label>
+      <input
+        name="listing[image]"
+        value="<%= listing.image.url %>"
+        type="text"
+        class="form-control"
+        placeholder="Enter image URL"
+      />
+      <div class="invalid-feedback">
+        Please provide a valid image URL (optional).
+      </div>
+    </div>
+    <br /><br />
+
+    <div class="form-group">
+      <label for="price" class="form-label">Price</label>
+      <input
+        name="listing[price]"
+        value="<%= listing.price %>"
+        type="number"
+        class="form-control"
+        placeholder="Enter price"
+        required
+      />
+      <div class="invalid-feedback">Please provide a valid price.</div>
+    </div>
+    <br /><br />
+
+    <div class="form-group">
+      <label for="country" class="form-label">Country</label>
+      <input
+        name="listing[country]"
+        value="<%= listing.country %>"
+        type="text"
+        class="form-control"
+        placeholder="Enter country"
+        required
+      />
+      <div class="invalid-feedback">Please provide a country name.</div>
+    </div>
+    <br /><br />
+
+    <div class="form-group">
+      <label for="location" class="form-label">Location</label>
+      <input
+        name="listing[location]"
+        value="<%= listing.location %>"
+        type="text"
+        class="form-control"
+        placeholder="Enter location"
+        required
+      />
+      <div class="invalid-feedback">Please provide a location.</div>
+    </div>
+    <br /><br />
+
+    <button class="btn btn-dark edit-btn mt-3">Edit</button>
+  </form>
+
+  <script>
+    // Bootstrap form validation script
+    (function () {
+      "use strict";
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll(".needs-validation");
+
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener(
+          "submit",
+          function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add("was-validated");
+          },
+          false
+        );
+      });
+    })();
+  </script>
+</body>
