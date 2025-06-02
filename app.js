@@ -8,7 +8,9 @@ const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync"); // Ensure this utility is correctly defined
 //const ExpressError = require("./utils/ExpressError.js");
 
-const MONGO_URL = "mongodb://localhost:27017/wanderlust";
+//const MONGO_URL = "mongodb://localhost:27017/wanderlust";
+const MONGO_URL =
+  process.env.MONGO_URI || "mongodb://localhost:27017/wanderlust";
 
 // MongoDB connection
 main()
@@ -151,8 +153,12 @@ app.use((err, req, res, next) => {
 });
 
 // Server setup
-app.listen(8080, () => {
-  console.log("Server is listening on port 8080");
+// app.listen(8080, () => {
+//   console.log("Server is listening on port 8080");
+// });
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
 });
 
 // const express = require("express");
